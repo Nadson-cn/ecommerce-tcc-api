@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include('../partials/header'); %>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-3">
-                    <h2>Recuperar Senha</h2>
-                    <hr/><br/>
+  <head>
+    <%- include('../partials/header'); %>
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="containerMain">
+    <div class="container containerMain">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <h2 class="title">Recuperar Senha</h2>
 
-                    <% if(success){ %>
-                        <div class="alert alert-success">
-                            <%= success %>
-                        </div>
-                        <div class="text-center">
-                            <h3>Agora pode fazer seu login novamente :)</h3>
-                        </div>
-                    <% } %>
-
-                    <% if(error){ %>
-                        <div class="alert alert-danger">
-                            <%= error %>
-                        </div>
-                    <% } %>
-
-                    <% if(!success) { %>
-                    <p>
-                        Digite aqui sua nova senha
-                    </p>
-                    <form action="/v1/api/usuarios/senha-recuperada" method="POST">
-                        <input type="hidden" name="token" value="<%= token %>" />
-                        <div class="form-group">
-                            <input 
-                                type="password"
-                                name="password"
-                                class="form-control"
-                                placeholder="Digite sua nova senha"
-                                />
-                        </div>
-                        <button class="btn btn-primary">
-                            Criar Nova Senha
-                        </button>
-                    </form>
-                    <% } %> 
-                </div>
+          <% if(!success) { %>
+          <p class="info">Digite aqui sua nova senha</p>
+          <form
+            action="/v1/api/usuarios/senha-recuperada"
+            method="POST"
+            class="form"
+          >
+            <input type="hidden" name="token" value="<%= token %>" />
+            <div class="form-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control input"
+                placeholder="Digite sua nova senha"
+              />
             </div>
+            <button class="btn-confirm">Criar Nova Senha</button>
+          </form>
+          <% } %> <% if(success){ %>
+          <div class="alert alert-success"><%= success %></div>
+          <div class="text-center">
+            <h3>Agora pode fazer seu login novamente :)</h3>
+          </div>
+          <% } %> <% if(error){ %>
+          <div class="alert alert-danger"><%= error %></div>
+          <% } %>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>

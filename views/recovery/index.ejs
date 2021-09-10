@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <%- include('../partials/header'); %>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3 col-sm-offset-3">
-                    <h2>Recuperar Senha</h2>
-                    <hr /><br />
+  <head>
+    <%- include('../partials/header'); %>
+    <link
+      rel="stylesheet"
+      href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="containerMain">
+    <div class="container containerMain">
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <h2 class="title">Recuperar Senha</h2>
+          <p class="info">
+            Digite seu email para receber as instruções de como reiniciar a sua
+            senha
+          </p>
 
-                    <% if(success){ %>
-                        <div class="alert alert-success">
-                            <%= success %>
-                        </div>
-                    <% } %>
-
-                    <% if(error){ %>
-                        <div class="alert alert-danger">
-                            <%= error %>
-                        </div>
-                    <% } %>
-
-                    <p>
-                        Digite seu email para receber as instruções de como reiniciar a sua senha
-                    </p>
-
-                    <form action="/v1/api/usuarios/recuperar-senha" method="POST">
-                        <div class="form-group">
-                            <input 
-                                type="email"
-                                name="email"
-                                class="form-control"
-                                placeholder="Digite seu e-mail"
-                                 />
-                        </div>
-                        <button class="btn btn-primary">
-                            Recuperar Senha
-                        </button>
-                    </form>
-                </div>
+          <form
+            action="/v1/api/usuarios/recuperar-senha"
+            method="POST"
+            class="form"
+          >
+            <div class="form-group">
+              <input
+                type="email"
+                name="email"
+                class="form-control input"
+                placeholder="Digite seu e-mail"
+              />
             </div>
+            <button class="btn-confirm">Recuperar Senha</button>
+          </form>
+          <% if(success){ %>
+          <div class="alert alert-success"><%= success %></div>
+          <% } %> <% if(error){ %>
+          <div class="alert alert-danger"><%= error %></div>
+          <% } %>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>
