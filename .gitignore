@@ -5,3 +5,4 @@ package-lock.json
 
 config/email.js
 config/index.js
+config/database.json
