@@ -20,10 +20,12 @@ app.use("/public", express.static(__dirname + "/public"));
 app.use("/public/images", express.static(__dirname + "/public/images"));
 
 // SETUP MONGODB
-const dbs = require("./config/database.json");
-const dbURI = isProduction ? dbs.dbProduction : dbs.dbTest;
-mongoose.connect(dbURI, { useNewUrlParser: true });
-require('dotenv').config({ path: 'ENV_FILENAME' });
+//const dbs = require("./config/database.json");
+//const dbURI = isProduction ? dbs.dbProduction : dbs.dbTest;
+mongoose.connect(process.env.MONGO_URL, 
+{
+   useNewUrlParser: true 
+});
 
 // SETUP EJS
 app.set("view engine", "ejs");
