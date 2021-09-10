@@ -23,6 +23,7 @@ app.use("/public/images", express.static(__dirname + "/public/images"));
 const dbs = require("./config/database.json");
 const dbURI = isProduction ? dbs.dbProduction : dbs.dbTest;
 mongoose.connect(dbURI, { useNewUrlParser: true });
+require('dotenv').config({ path: 'ENV_FILENAME' });
 
 // SETUP EJS
 app.set("view engine", "ejs");
