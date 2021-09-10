@@ -6,7 +6,7 @@
   "scripts": {
     "teste": "mocha --timeout 2000 --exit",
     "dev": "NODE_ENV=development node server.js",
-    "build": "NODE_ENV=production start server.js --name=\"ecommerce-api\""
+    "build": "NODE_ENV=production node server.js --name=\"ecommerce-api\""
   },
   "author": "Nadson Cardoso",
   "license": "ISC",
