@@ -13,6 +13,7 @@ const app = express();
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
+const server = require('http').createServer();
 const PORT = process.env.APP_URL || 3000;
 
 require('dotenv/config');
@@ -66,5 +67,5 @@ app.use((err, req, res, next) => {
 //ESCUTAR
 app.listen(PORT, (err) => {
   if(err) throw err;
-  console.log(`Rodando na //localhost:${PORT}`);
+  console.log(`Listening on ${PORT}`);
 });
