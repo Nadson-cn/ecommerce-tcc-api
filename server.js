@@ -15,6 +15,8 @@ const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 const PORT = process.env.APP_URL || 3000;
 
+require('dotenv/config');
+
 // ARQUIVOS ESTÁTICOS
 app.use("/public", express.static(__dirname + "/public"));
 app.use("/public/images", express.static(__dirname + "/public/images"));
