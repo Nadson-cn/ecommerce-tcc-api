@@ -13,8 +13,7 @@ const app = express();
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const server = require('http').createServer();
-const PORT = process.env.APP_URL || 3000;
+const PORT = process.env.PORT || 3000;
 
 require('dotenv/config');
 
