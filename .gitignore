@@ -3,5 +3,4 @@ package-lock.json
 
 .env
 
-config/email.js
 config/database.json
