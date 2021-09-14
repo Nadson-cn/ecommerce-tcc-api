@@ -20,7 +20,7 @@ module.exports = ({ usuario, recovery }, cb) => {
     `;
 
     const opcoesEmail = {
-        from: "casemaker.tcc@gmail.com",
+        from: process.env.EMAIL_USER,
         to: usuario.email,
         subject: "Redefinição de Senha - Case Maker",
         html: message
