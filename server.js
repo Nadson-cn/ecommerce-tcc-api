@@ -15,7 +15,7 @@ const app = express();
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const Port = process.env.APPURL;
+const PORT = process.env.PORT || 3333;
 
 
 // ARQUIVOS ESTÁTICOS
@@ -61,7 +61,7 @@ app.use((err, req, res, next) => {
 });
 
 //ESCUTAR
-app.listen(Port, (err) => {
+app.listen(PORT, (err) => {
   if(err) throw err;
-  console.log(`Listening on ${Port}`);
+  console.log(`Listening on ${PORT}`);
 });
