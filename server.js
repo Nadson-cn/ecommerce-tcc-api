@@ -10,12 +10,12 @@ const crypto = require("crypto");
 
 // START
 const app = express();
+require('dotenv/config');
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
-require('dotenv/config');
 
 // ARQUIVOS ESTÁTICOS
 app.use("/public", express.static(__dirname + "/public"));
