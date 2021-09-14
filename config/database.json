@@ -1,4 +1,0 @@
-{
-  "dbTest": "mongodb+srv://adminCM:adminCM@cluster.xlerm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-  "isProduction":  "mongodb+srv://adminCM:adminCM@cluster.xlerm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-}
