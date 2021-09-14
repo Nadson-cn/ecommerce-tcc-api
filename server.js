@@ -15,7 +15,7 @@ const app = express();
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const Port = process.env.APP_URL;
+const Port = process.env.APPURL;
 
 
 // ARQUIVOS ESTÁTICOS
