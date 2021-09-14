@@ -26,7 +26,7 @@ module.exports = ({ usuario, recovery }, cb) => {
         html: message
     };
 
-    if( process.env.NODE_ENV = "production" && "test" ){
+    if( process.env.NODE_ENV = "production"){
         transporter.sendMail(opcoesEmail, (error, info) => {
             if(error){
                 console.log(error);
