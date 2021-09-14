@@ -1,3 +1,5 @@
+require('dotenv/config');
+
 // PACOTES 
 const compression = require("compression");
 const express = require("express");
@@ -10,11 +12,10 @@ const crypto = require("crypto");
 
 // START
 const app = express();
-require('dotenv/config');
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 
 // ARQUIVOS ESTÁTICOS
