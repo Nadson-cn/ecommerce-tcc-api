@@ -5,9 +5,9 @@ const Produto = mongoose.model("Produto");
 class OpcaoController {
 
   async index(req, res, next){
-    const { produto } = req.query;
+    //const { produto } = req.query;
     try {
-      const opcoes = await Opcao.find({ produto });
+      const opcoes = await Opcao.find();
       return res.send({ opcoes });
     } catch(err){
       console.log(err);

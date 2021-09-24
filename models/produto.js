@@ -10,10 +10,12 @@ const ProdutoSchema = Schema({
   Imagem_URL: { type: String },
   preco: { type: Number, required: true},
   promocao: { type: Number },
+  descricao: { type: String },
   categoria: { type: Schema.Types.ObjectId, ref: "Categoria" },
   avaliacoes: { type: [{ type: Schema.Types.ObjectId, ref: "Avaliacoes" }] },
   opcao: { type: Schema.Types.ObjectId, ref: "Opcao" },
-  estoque: { type: Schema.Types.ObjectId, ref: "Estoque" } 
+  estoque: { type: Schema.Types.ObjectId, ref: "Estoque" },
+  fichaTecnica: { type: Schema.Types.ObjectId, ref: "FichaTecnica" } 
 }, { timestamps: true });
 
 ProdutoSchema.plugin(mongoosePaginate);

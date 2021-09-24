@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "teste": "mocha --timeout 2000 --exit",
-    "dev": "NODE_ENV=development node server.js",
+    "dev": "NODE_ENV=development nodemon node server.js",
     "start": "NODE_ENV=production node server.js"
   },
   "author": "Nadson Cardoso",

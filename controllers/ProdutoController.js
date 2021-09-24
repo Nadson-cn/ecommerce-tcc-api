@@ -28,7 +28,7 @@ class ProdutoController {
   
   // POST / - store
   async store(req,res,next){
-    const { titulo, categoria: categoriaId, marca, tipo, preco, Imagem_URL, promocao } = req.body;
+    const { titulo, categoria: categoriaId, marca, descricao, tipo, preco, Imagem_URL, promocao } = req.body;
 
     try {
         
@@ -37,6 +37,7 @@ class ProdutoController {
             disponibilidade: true, 
             categoria: categoriaId, 
             tipo,
+            descricao,
             preco, 
             marca,
             Imagem_URL,
@@ -59,7 +60,7 @@ class ProdutoController {
 
   // PUT /:id
   async update(req,res,next){
-    const { titulo, marca, Imagem_URL, disponibilidade, categoria, tipo, preco, promocao } = req.body;
+    const { titulo, marca, Imagem_URL, disponibilidade, categoria, tipo, descricao, preco, promocao } = req.body;
 
     try{
       const produto = await Produto.findById(req.params.id);
@@ -68,11 +69,14 @@ class ProdutoController {
       if(titulo) produto.titulo = titulo;
       if(marca) produto.marca = marca;
       if(tipo) produto.tipo = tipo;
+      if(descricao) produto.descricao = descricao;
       if(Imagem_URL) produto.Imagem_URL = Imagem_URL;
       if(disponibilidade !== undefined) produto.disponibilidade = disponibilidade;
       if(preco) produto.preco = preco;
       if(promocao) produto.promocao = promocao;
-    
+      console.info(descricao);
+      console.info(marca);
+      
        if( categoria && categoria.toString() !== produto.categoria.toString() ){
         const oldCategoria = await Categoria.findById(produto.categoria);
         const newCategoria = await Categoria.findById(categoria);

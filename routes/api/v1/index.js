@@ -8,6 +8,7 @@ router.use("/produtos", require("./produtos"));
 router.use("/avaliacoes", require("./avaliacoes")); 
 router.use("/estoque", require("./variacoes")); 
 router.use("/opcao", require("./opcoes")); 
+router.use("/ficha", require("./fichas")); 
 
 router.use("/pedidos", require("./pedidos")); 
 

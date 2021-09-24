@@ -6,9 +6,8 @@ const Produto = mongoose.model("Produto");
 class AvaliacaoController {
   // GET / 
   async index(req, res, next){
-    const { produto } = req.query;
     try {
-      const avaliacoes = await Avaliacao.find({ produto });
+      const avaliacoes = await Avaliacao.find();
 
       return res.send({ avaliacoes });
     } catch(err){

@@ -6,9 +6,8 @@ const Produto = mongoose.model("Produto");
 class EstoqueController {
   // GET / 
   async index(req, res, next){
-    const { produto } = req.query;
     try {
-      const estoques = await Estoque.find({ produto });
+      const estoques = await Estoque.find();
       return res.send({ estoques });
     } catch(err){
       console.log(err);

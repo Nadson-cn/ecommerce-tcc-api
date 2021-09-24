@@ -9,6 +9,7 @@ const ProdutoValidation = {
     categoria: Joi.string().alphanum().length(24).required(),
     preco: Joi.number().required(), 
     promocao: Joi.number(),
+    descricao: Joi.string()
   },
 
   update: {
@@ -18,6 +19,7 @@ const ProdutoValidation = {
     body:{
       titulo: Joi.string().optional(),
       marca: Joi.string().optional(),
+      descricao: Joi.string().optional(),
       categoria: Joi.string().alphanum().length(24).optional(),
       preco: Joi.number().optional(), 
       promocao: Joi.number(),
