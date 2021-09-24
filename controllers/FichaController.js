@@ -42,6 +42,28 @@ class FichaController {
     next(err);
     }
   }  
+
+  async update(req, res, next){
+    try {
+      const { especificacoes, formato, cor_exterior, painel_lateral, placa_mae, baias, dimensoes } = req.body;
+      const ficha_tecnica = await FichaTecnica.findById(req.params.id);
+  
+      if(especificacoes) ficha_tecnica.especificacoes = especificacoes;
+      if(formato) ficha_tecnica.formato = formato;
+      if(cor_exterior) ficha_tecnica.cor_exterior = cor_exterior;
+      if(painel_lateral) ficha_tecnica.painel_lateral = painel_lateral;
+      if(placa_mae) ficha_tecnica.placa_mae = placa_mae;
+      if(baias) ficha_tecnica.baias = baias;
+      if(dimensoes) ficha_tecnica.dimensoes = dimensoes;
+  
+      await ficha_tecnica.save();
+      return res.send({ ficha_tecnica });
+    } catch(err){
+      console.log(err);
+      next(err);
+    }
+  }
+
    // GET /:id 
    async show(req,res,next){
     const { produto } = req.params;

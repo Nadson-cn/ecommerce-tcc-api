@@ -24,15 +24,23 @@ const FichaValidation = {
       id: Joi.string().alphanum().length(24).required()
     },
     body:{
-        especificacoes: Joi.array().items(Joi.object({
-            formato: Joi.string().optional(),
-            cor_exterior: Joi.string().optional(),
-            painel_lateral: Joi.string().optional(),
-        })).required(), 
+        especificacoes: Joi.array().items(Joi.string()).optional(),
         baias: Joi.array().items(Joi.string()).optional(), 
         placa_mae: Joi.array().items(Joi.string()).optional(), 
         dimensoes: Joi.string().required(),
     }},
+
+    update: {
+      params:{
+        id: Joi.string().required()
+      },
+      body: {
+        especificacoes: Joi.array().items(Joi.string()).optional(),
+        baias: Joi.array().items(Joi.string()).optional(), 
+        placa_mae: Joi.array().items(Joi.string()).optional(), 
+        dimensoes: Joi.string().required(),
+      }
+    },
 
   remove: {
     params: {
