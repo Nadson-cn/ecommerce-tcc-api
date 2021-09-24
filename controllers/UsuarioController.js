@@ -36,11 +36,12 @@ class UsuarioController {
         const { nome, email, password } = req.body;
         const usuario = new Usuario({ nome, email });
         usuario.setSenha(password);
+        if(email === usuario.email) res.status(401).json({ errors: "Email já cadastrado!" });
 
         usuario.save()
         .then(() => res.json({ usuario: usuario.enviarAuthJSON() }))
         .catch((err) => {
-            console.log(err);
+            console.info(err);
             next(err);
         });
     };
