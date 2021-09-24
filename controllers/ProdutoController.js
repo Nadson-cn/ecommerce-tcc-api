@@ -74,8 +74,6 @@ class ProdutoController {
       if(disponibilidade !== undefined) produto.disponibilidade = disponibilidade;
       if(preco) produto.preco = preco;
       if(promocao) produto.promocao = promocao;
-      console.info(descricao);
-      console.info(marca);
       
        if( categoria && categoria.toString() !== produto.categoria.toString() ){
         const oldCategoria = await Categoria.findById(produto.categoria);
