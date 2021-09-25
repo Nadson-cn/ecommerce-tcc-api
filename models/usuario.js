@@ -37,7 +37,7 @@ const UsuarioSchema = new mongoose.Schema({
 },{ timestamps: true }
 );
 
-UsuarioSchema.plugin(uniqueValidator, { message: "já está sendo utilizado" });
+UsuarioSchema.plugin(uniqueValidator, { message: "Email já cadastrado!" });
 
 UsuarioSchema.methods.setSenha = function(password){
     this.salt = crypto.randomBytes(16).toString("hex");

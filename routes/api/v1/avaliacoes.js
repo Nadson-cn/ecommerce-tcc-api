@@ -12,8 +12,9 @@ const avaliacaoController = new AvaliacaoController();
 /**
  * CLIENTES - VISITANTES
  */
-router.get("/", Validation(AvaliacaoValidation.index), avaliacaoController.index);
-router.get("/:id", Validation(AvaliacaoValidation.show), avaliacaoController.show);
+router.get("/all", Validation(AvaliacaoValidation.index), avaliacaoController.index);
+router.get("/", Validation(AvaliacaoValidation.show), (avaliacaoController.show));
+
 router.post("/", Validation(AvaliacaoValidation.store), auth.required, avaliacaoController.store);
 
 /**

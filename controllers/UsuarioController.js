@@ -5,6 +5,10 @@ const crypto = require("crypto");
 const usuario = require("../models/usuario");
 const { request } = require("http");
 
+const uniqueValidator = require('mongoose-unique-validator');
+const { find } = require("../models/usuario");
+
+
 class UsuarioController {
 
     // GET /
@@ -25,27 +29,26 @@ class UsuarioController {
                     nome: usuario.nome,
                     email: usuario.email,
                     permissao: usuario.permissao,
-                    token: usuario.token
+                    //token: usuario.token
                 }
             });
         }).catch(next);
     };
  
     // POST /registrar
-    store(req , res, next){
+   
+    
+    async store(req , res, next){
         const { nome, email, password } = req.body;
-        const usuario = new Usuario({ nome, email });
-        usuario.setSenha(password);
-        if(email === usuario.email) res.status(401).json({ errors: "Email já cadastrado!" });
 
-        usuario.save()
-        .then(() => res.json({ usuario: usuario.enviarAuthJSON() }))
-        .catch((err) => {
-            console.info(err);
-            next(err);
-        });
-    };
+        
+            const usuario = new Usuario({ nome, email });
+            usuario.setSenha(password);
 
+            return usuario.save().then(() => {
+                return res.json({ usuario: usuario.enviarAuthJSON() });
+            }).catch(next);
+        }
     // PUT /
     update(req, res, next){
         const { nome, email, password } = req.body;

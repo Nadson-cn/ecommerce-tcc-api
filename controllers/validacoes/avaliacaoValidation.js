@@ -3,7 +3,7 @@ const Joi = require("joi");
 const AvaliacaoValidation = {
     index: {
         query:{
-            produto: Joi.string().alphanum().length(24).required(),
+            //produto: Joi.string().alphanum().length(24).required(),
         }
     }, 
 
@@ -12,7 +12,7 @@ const AvaliacaoValidation = {
             produto: Joi.string().alphanum().length(24).required(),
         },
         params:{
-            id: Joi.string().alphanum().length(24).required()
+           // id: Joi.string().alphanum().length(24).required()
         }
     },
 

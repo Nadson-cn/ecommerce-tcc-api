@@ -5,11 +5,11 @@ const Produto = mongoose.model("Produto");
 
 class AvaliacaoController {
   // GET / 
+  
   async index(req, res, next){
     try {
-      const avaliacoes = await Avaliacao.find();
-
-      return res.send({ avaliacoes });
+      const avalia = await Avaliacao.find();
+      return res.send({ avalia });
     } catch(err){
       console.log(err);
       next(err)
@@ -19,10 +19,8 @@ class AvaliacaoController {
   // GET /:id
   async show(req, res, next){
     const { produto } = req.query;
-    const { id: _id } = req.params;
-
     try {
-      const avaliacao = await Avaliacao.findOne({ _id, produto });
+      const avaliacao = await Avaliacao.findOne({ produto });
       return res.send({ avaliacao });
     } catch(err){
       console.log(err);

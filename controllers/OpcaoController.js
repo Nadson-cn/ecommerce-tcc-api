@@ -5,7 +5,6 @@ const Produto = mongoose.model("Produto");
 class OpcaoController {
 
   async index(req, res, next){
-    //const { produto } = req.query;
     try {
       const opcoes = await Opcao.find();
       return res.send({ opcoes });
@@ -47,11 +46,10 @@ class OpcaoController {
    // GET /:id 
    async show(req,res,next){
     const { produto } = req.query;
-    const { id: _id } = req.params;
 
     try{
-      const opcoes = await Opcao.findOne({ _id, produto });
-      return res.send({ opcoes });
+      const opcao = await Opcao.findOne({ produto });
+      return res.send({ opcao });
 
     } catch(err){
       console.log(err);
@@ -76,18 +74,6 @@ class OpcaoController {
     }
   }
 
-  // AVALIAÇOES 
-  // GET /:id/avaliacoes
-  async showAvaliacoes(req,res,next){
-    try{  
-      const avaliacoes = await Avaliacao.find({ produto: req.params.id });
-      return res.send({ avaliacoes });
-    } catch(err){
-      next(e);
-      console.log(err);
-    }
-  }
 }
-
 
 module.exports = OpcaoController;

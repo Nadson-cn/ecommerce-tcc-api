@@ -74,8 +74,8 @@ const OpcaoValidation = {
   }, 
   
   show:{
-    params: {
-      id: Joi.string().alphanum().length(24).required()
+    query: {
+      produto: Joi.string().alphanum().length(24).required()
     }
   },
 
