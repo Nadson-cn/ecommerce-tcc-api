@@ -22,6 +22,11 @@ const UsuarioValidation = {
       password: Joi.string().optional()
     }
   },
+  //updateImages: {
+   // params: {
+     // id: Joi.string().alphanum().length(24).required()
+   // }
+  //},
   login: {
     body: {
       email: Joi.string().email().required(),

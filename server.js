@@ -17,6 +17,9 @@ const app = express();
 const isProduction = process.env.NODE_ENV === "production";
 const PORT = process.env.PORT || 3000;
 
+// app.use(express().bodyParser({
+//   limit: "50mb"
+// }));
 
 // ARQUIVOS ESTÁTICOS
 app.use("/public", express.static(__dirname + "/public"));
@@ -37,8 +40,8 @@ app.disable('x-power-by');
 app.use(compression());
 
 // SETUP BODY PARSER
-app.use(bodyParser.urlencoded({ extended: false, limit: 1.5*1024*1024 }));
-app.use(bodyParser.json({ limit: 1.5*1024*1025 }));
+app.use(bodyParser.urlencoded({ extended: false, limit: 5*1024*1024 }));
+app.use(bodyParser.json({ limit: 5*1024*1025 }));
 
 // MODELS
 require("./models");

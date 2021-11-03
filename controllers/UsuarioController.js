@@ -1,13 +1,16 @@
 const mongoose = require("mongoose");
 const Usuario = mongoose.model("Usuario");
 const enviarEmailRecovery = require("../helpers/email-recovery");
-const crypto = require("crypto");
 const usuario = require("../models/usuario");
-const { request } = require("http");
+const { url } = require("inspector");
+const ImageKit = require("imagekit");
+const fs = require("fs");
 
-const uniqueValidator = require('mongoose-unique-validator');
-const { find } = require("../models/usuario");
-
+const imagekit = new ImageKit({
+    publicKey : process.env.PUBLIC_KEY,
+    privateKey : process.env.PRIVATE_KEY,
+    urlEndpoint : process.env.URL_IMAGEKIT
+});
 
 class UsuarioController {
 
@@ -28,8 +31,8 @@ class UsuarioController {
                 usuario: {
                     nome: usuario.nome,
                     email: usuario.email,
-                    permissao: usuario.permissao,
-                    //token: usuario.token
+                    //permissao: usuario.permissao,
+                    image: usuario.image
                 }
             });
         }).catch(next);
@@ -50,19 +53,48 @@ class UsuarioController {
             }).catch(next);
         }
     // PUT /
-    update(req, res, next){
+    async update(req, res, next){
         const { nome, email, password } = req.body;
+
+        const data = await imagekit.upload({
+            file: base64Image,
+            fileName,
+        }).then(res => res);
+    
+        const url = data.url;
+
         Usuario.findById(req.payload.id).then((usuario) => {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             if(typeof nome !== "undefined") usuario.nome = nome;
             if(typeof email !== "undefined") usuario.email = email;
             if(typeof password !== "undefined") usuario.setSenha(password);
-
+            if(typeof imageUrl !== "undefined") usuario.imageUrl = url; 
             return usuario.save().then(() => {
                 return res.json({ usuario: usuario.enviarAuthJSON() });
             }).catch(next);
         }).catch(next);
     };
+
+     // PUT /imagens/:id
+    async updateImages(req, res, next){
+        const { base64Image, fileName } = req.body;
+        const data = await imagekit.upload({
+            file: base64Image,
+            fileName,
+        }).then(res => res);
+    
+        const url = data.url;
+
+        const usuario = await Usuario.findOne({ _id: req.params.id });
+        if(!usuario) return res.status(400).send({ error: "Usuário não cadastrado." });
+        usuario.imageUrl = url;
+        
+
+        await usuario.save();
+
+        return res.send({ usuario: usuario.enviarJSON() });
+
+    }
 
     // DELETE /
     remove(req, res, next){

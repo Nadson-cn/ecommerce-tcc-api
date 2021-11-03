@@ -46,7 +46,6 @@ class OpcaoController {
    // GET /:id 
    async show(req,res,next){
     const { produto } = req.query;
-
     try{
       const opcao = await Opcao.findOne({ produto });
       return res.send({ opcao });

@@ -11,6 +11,8 @@ const UsuarioSchema = new mongoose.Schema({
         required: [true,"não pode ficar vazio."]
     },
 
+    imageUrl: { type: String, default: "https://ik.imagekit.io/casemaker/Default_yP_49-MXA.png?updatedAt=1635906495714" },
+
     email: {
         type: String,
         lowercase: true,
@@ -68,7 +70,18 @@ UsuarioSchema.methods.enviarAuthJSON = function(){
         nome: this.nome,
         email: this.email,
         role: this.permissao,
-        token: this.gerarToken()
+        token: this.gerarToken(),
+        imageUrl: this.imageUrl
+    };
+};
+
+UsuarioSchema.methods.enviarJSON = function(){
+    return {
+        _id: this._id,
+        nome: this.nome,
+        email: this.email,
+        role: this.permissao,
+        imageUrl: this.imageUrl
     };
 };
 // RECUPERACAO
