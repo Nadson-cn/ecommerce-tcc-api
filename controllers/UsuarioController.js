@@ -84,7 +84,7 @@ class UsuarioController {
         }).then(res => res);
     
         const url = data.url;
-        Usuario.findById(req.payload.id).then((usuario) => {
+        Usuario.findById(req.payload.id).then(async(usuario)  =>  {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             usuario.imageUrl = url;
             await usuario.save();

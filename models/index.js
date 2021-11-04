@@ -6,6 +6,7 @@ require("./produto");
 require("./avaliacao");
 require("./estoque");
 require("./opcao");
+require("./carrinho");
 require("./fichaTecnica");
 require("./image");
 

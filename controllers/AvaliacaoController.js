@@ -8,8 +8,8 @@ class AvaliacaoController {
   
   async index(req, res, next){
     try {
-      const avalia = await Avaliacao.find();
-      return res.send({ avalia });
+      const avaliacao = await Avaliacao.find();
+      return res.send({ avaliacao });
     } catch(err){
       console.log(err);
       next(err)
@@ -37,7 +37,6 @@ class AvaliacaoController {
 
       const _produto = await Produto.findById(produto);
       if(!_produto) return res.status(422).send({ error: "Produto não existe!"});
-      console.log(_produto.avaliacoes);
       _produto.avaliacoes.push(avaliacao._id);
 
       await _produto.save();
