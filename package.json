@@ -6,7 +6,7 @@
   "scripts": {
     "teste": "mocha --timeout 2000 --exit",
     "dev": "NODE_ENV=development nodemon server.js",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production start server.js"
   },
   "author": "Nadson Cardoso",
   "license": "ISC",
