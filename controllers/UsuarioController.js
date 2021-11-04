@@ -84,16 +84,14 @@ class UsuarioController {
         }).then(res => res);
     
         const url = data.url;
-
-        const usuario = await Usuario.findOne({ _id: req.params.id });
-        if(!usuario) return res.status(400).send({ error: "Usuário não cadastrado." });
-        usuario.imageUrl = url;
-        
-
-        await usuario.save();
-
-        return res.send({ usuario: usuario.enviarJSON() });
-
+        Usuario.findById(req.payload.id).then((usuario) => {
+            if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
+            usuario.imageUrl = url;
+            await usuario.save();
+            return res.send({ usuario: usuario.enviarJSON() });
+        }).catch(next);
+        //const usuario = await Usuario.findOne({ _id: req.payload.id }).then();
+        //if(!usuario) return res.status(400).send({ error: "Usuário não cadastrado." });
     }
 
     // DELETE /
