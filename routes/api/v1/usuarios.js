@@ -22,7 +22,7 @@ router.post("/registrar", Validation(UsuarioValidation.store), usuarioController
 //router.post("/profile", upload.single('profile'), usuarioController.updateImages);
 
 router.put("/", auth.required, Validation(UsuarioValidation.update), usuarioController.update); // PRONTO
-router.put("/imagem-usuario/:id", auth.required, usuarioController.updateImages); // PRONTO
+router.put("/imagem-usuario", auth.required, usuarioController.updateImages); // PRONTO
 router.delete("/", auth.required, usuarioController.remove); // PRONTO
 
 
