@@ -8,7 +8,6 @@ require("./estoque");
 require("./opcao");
 require("./carrinho");
 require("./fichaTecnica");
-require("./image");
 
 require("./pedido");
 require("./entrega");

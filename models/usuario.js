@@ -22,6 +22,8 @@ const UsuarioSchema = new mongoose.Schema({
         match: [/\S+@\S+\.\S+/, 'é inválido.']
     },
 
+    carrinho: { type: Schema.Types.ObjectId, ref: "Carrinho" },
+
     permissao: {
         type: Array,
         default: ["cliente"],

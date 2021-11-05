@@ -56,19 +56,11 @@ class UsuarioController {
     async update(req, res, next){
         const { nome, email, password } = req.body;
 
-        const data = await imagekit.upload({
-            file: base64Image,
-            fileName,
-        }).then(res => res);
-    
-        const url = data.url;
-
         Usuario.findById(req.payload.id).then((usuario) => {
             if(!usuario) return res.status(401).json({ errors: "Usuario não registrado" });
             if(typeof nome !== "undefined") usuario.nome = nome;
             if(typeof email !== "undefined") usuario.email = email;
             if(typeof password !== "undefined") usuario.setSenha(password);
-            if(typeof imageUrl !== "undefined") usuario.imageUrl = url; 
             return usuario.save().then(() => {
                 return res.json({ usuario: usuario.enviarAuthJSON() });
             }).catch(next);
@@ -90,8 +82,6 @@ class UsuarioController {
             await usuario.save();
             return res.send({ usuario: usuario.enviarJSON() });
         }).catch(next);
-        //const usuario = await Usuario.findOne({ _id: req.payload.id }).then();
-        //if(!usuario) return res.status(400).send({ error: "Usuário não cadastrado." });
     }
 
     // DELETE /

@@ -2,7 +2,6 @@ const router = require("express").Router();
 const auth = require("../../auth");
 const UsuarioController = require("../../../controllers/UsuarioController");
 const mongoose = require("mongoose");
-const Image = mongoose.model("Image");
 // const upload = require("../../../config/multer");
 
 // const uploadUser = require('./middlewares/uploadImage');
