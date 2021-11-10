@@ -15,6 +15,7 @@ const fs = require("fs");
 
 const usuarioController = new UsuarioController();
 
+router.get("/all", usuarioController.get)
 router.post("/login", Validation(UsuarioValidation.login), usuarioController.login); // PRONTO
 router.post("/registrar", Validation(UsuarioValidation.store), usuarioController.store); // PRONTO
 //router.put("/images/:id", auth.required, upload.single("files"), usuarioController.updateImages);

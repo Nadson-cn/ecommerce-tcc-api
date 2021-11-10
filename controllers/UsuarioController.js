@@ -22,6 +22,11 @@ class UsuarioController {
         }).catch(next);
     }
 
+    async get(req,res,next){
+        const get = await Usuario.find();
+        return res.send({ get });
+    }
+
     // GET /:id
     show(req, res, next){
         Usuario.findById(req.params.id)
