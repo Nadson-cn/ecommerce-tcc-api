@@ -25,12 +25,13 @@ class CategoriaController {
 
   // SHOW /:id show
   show(req,res,next){
-    Categoria.findOne({ _id: req.params.id })
-    .select("_id produtos nome disponibilidade")
-    .populate(["produtos"])
-    .then(categoria => res.send({ categoria }))
-    .catch(next);
-}
+      Categoria.findOne({ nome: req.params.nome })
+      .select("_id produtos nome")
+      .populate(["produtos"])
+      .then(categoria => res.send({ categoria }))
+      .catch(next);
+    }
+
 
   // POST / store
   store(req,res,next){

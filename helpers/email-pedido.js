@@ -3,6 +3,7 @@ const { api: link } = require("../config/index");
 
 module.exports = ({ usuario, pedido }, cb) => {
     let pedidos = '';
+    let total = 0;
     let cont = 0;
 
     function createPedido(titulo, Imagem_URL, preco, quantidade ){
@@ -12,7 +13,7 @@ module.exports = ({ usuario, pedido }, cb) => {
                         ">
                     <h3>Produto ${cont} : ${titulo}</h3> 
                     <br><img src="${Imagem_URL}" width=190 height=190> <br> 
-                    <h3>Preco:</h3> R$${preco},00 <br>
+                    <h3>Preco:</h3> R$${preco} <br>
                     <h3>Quantidade:</h3> ${quantidade}
                     <br><br><hr />
             </div>
@@ -22,7 +23,8 @@ module.exports = ({ usuario, pedido }, cb) => {
     pedido.items.forEach(item => {
         cont++;
         pedidos += createPedido(item.titulo, item.Imagem_URL, item.preco, item.quantidade)
-        
+        total += (item.preco * item.quantidade)
+        console.log(total)
     });
     
    /* const corpoPedido = `
@@ -35,14 +37,15 @@ module.exports = ({ usuario, pedido }, cb) => {
 
     
     const messagePedido = `
-    <h1 style="text-align: center;">Seu Pedido</h1>
+    <h1 style="text-align: center;">Olá ${usuario.nome}! - Seu Pedido</h1>
     <br />
     <h2>
     Informações do pedido:
     </h2>
     <hr>
-     ${pedidos}
-        <br />
+    ${pedidos}
+    <h2>TOTAL: R$${total}</h2>
+    <br />
         <p>
         <h3>Obrigado!</h3>
         Case Maker! - o maior e-commerce de Gabinetes customizados do mundo.
