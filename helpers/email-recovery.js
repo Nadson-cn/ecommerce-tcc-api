@@ -5,6 +5,7 @@ const { api: link } = require("../config/index");
 //</a>
 
 module.exports = ({ usuario, recovery }, cb) => {
+
     const message = `
         <h1 style="text-align: center;">Recuperação de Senha</h1>
         <br />
@@ -36,7 +37,6 @@ module.exports = ({ usuario, recovery }, cb) => {
         transporter.sendMail(opcoesEmail, (error, info) => {
             if(error){
                 console.log(error);
-                return cb(error);
                 return cb("Aconteceu um erro no envio do email, tente novamente.");
             } else {
                 return cb(null, "Link para redefinicao de senha foi enviado com sucesso para seu email.");

@@ -60,7 +60,7 @@ class ProdutoController {
 
   // PUT /:id
   async update(req,res,next){
-    const { titulo, marca, Imagem_URL, disponibilidade, categoria, tipo, descricao, preco, promocao } = req.body;
+    const { titulo, marca, Imagem_URL, disponibilidade, categoria, tipo, descricao, preco, promocao, quantidade } = req.body;
 
     try{
       const produto = await Produto.findById(req.params.id);
@@ -74,6 +74,7 @@ class ProdutoController {
       if(disponibilidade !== undefined) produto.disponibilidade = disponibilidade;
       if(preco) produto.preco = preco;
       if(promocao) produto.promocao = promocao;
+      if(quantidade) produto.quantidade = quantidade;
       
        if( categoria && categoria.toString() !== produto.categoria.toString() ){
         const oldCategoria = await Categoria.findById(produto.categoria);
@@ -144,12 +145,10 @@ class ProdutoController {
 
   // GET / - index
   async index(req,res,next){
-    const offset = Number(req.query.offset) || 0;
-    const limit = Number(req.query.limit) || 30;
+    //const offset = Number(req.query.offset) || 0;
+    //const limit = Number(req.query.limit) || 30;
     try{
-      const produtos = await Produto.paginate(
-        { offset, limit, sort: getSort(req.query.sortType) }
-      );
+      const produtos = await Produto.find();
       return res.send({ produtos });
     } catch(err){
       console.log(err);
@@ -160,18 +159,17 @@ class ProdutoController {
   // GET /disponiveis 
   async indexDisponiveis(req,res,next){
     const offset = Number(req.query.offset) || 0;
-    const limit = Number(req.query.limit) || 30  ;
-    try{
-      const produtos = await Produto.paginate(
-        { disponibilidade: true },
-        { offset, limit, sort: getSort(req.query.sortType) }
-      );
-      return res.send({ produtos });
-    } catch(err){
-      console.log(err);
-      next(err);
+    const limit = Number(req.query.limit) || 30;
+    try {
+        const produtos = await Produto.paginate(
+            { loja: req.query.loja, disponibilidade: true },
+            { offset, limit, sort: getSort(req.query.sortType), populate: ["categoria"] }
+        );
+        return res.send({ produtos });
+    } catch(e){
+        next(e);
     }
-  }
+}
 
   // GET /search/:search
   async search(req,res,next){
@@ -198,11 +196,23 @@ class ProdutoController {
    // GET /:id 
    async show(req,res,next){
     try{
+
+      const accountSid = process.env.TWILIO_SID;
+      const authToken = process.env.TWILIO_TOKEN;
+      
+      const client = require('twilio')(accountSid, authToken);
+      const userNumber = '19996932478';      
+      client.messages 
+            .create({ 
+               body: 'Deu certo!', 
+               from: 'whatsapp:+14155238886',       
+               to: `whatsapp:+55${userNumber}` 
+             }) 
+            .then(message => console.log(message.sid)) 
+      
       const produto = await Produto
         .findById(req.params.id)
-        .populate([
-          "categorias",
-        ]);
+        .populate('Avaliacoes');
       return res.send({ produto });
     } catch(err){
       console.log(err);

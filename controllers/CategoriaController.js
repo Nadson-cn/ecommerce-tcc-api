@@ -8,7 +8,8 @@ class CategoriaController {
   // GET / Index
   index(req, res, next){
     Categoria.find()
-    .select("_id produtos nome")
+    .select("_id produtos nome disponibilidade")
+    .populate(["produtos"])
     .then((categorias) => res.send({ categorias }))
     .catch(next);
   }
@@ -24,12 +25,12 @@ class CategoriaController {
 
   // SHOW /:id show
   show(req,res,next){
-    Categoria.findOne({ nome: req.params.nome })
-    .select("_id produtos nome")
+    Categoria.findOne({ _id: req.params.id })
+    .select("_id produtos nome disponibilidade")
     .populate(["produtos"])
     .then(categoria => res.send({ categoria }))
     .catch(next);
-  }
+}
 
   // POST / store
   store(req,res,next){

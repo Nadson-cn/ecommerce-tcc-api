@@ -11,6 +11,7 @@ const ProdutoSchema = Schema({
   preco: { type: Number, required: true},
   promocao: { type: Number },
   descricao: { type: String },
+  quantidade: { type: Number },
   categoria: { type: Schema.Types.ObjectId, ref: "Categoria" },
   avaliacoes: { type: [{ type: Schema.Types.ObjectId, ref: "Avaliacoes" }] },
   opcao: { type: Schema.Types.ObjectId, ref: "Opcao" },

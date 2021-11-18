@@ -24,31 +24,8 @@ router.post("/registrar", Validation(UsuarioValidation.store), usuarioController
 router.put("/", auth.required, Validation(UsuarioValidation.update), usuarioController.update); // PRONTO
 router.put("/imagem-usuario", auth.required, usuarioController.updateImages); // PRONTO
 router.delete("/", auth.required, usuarioController.remove); // PRONTO
-
-
-router.post("/upload", async (req, res) => {
-    const { base64Image, fileName } = req.body;
-
-    // const base64Image = '';;
-    // const fileName = "Default_4RJbjbfsIF.png";
-
-    const imagekit = new ImageKit({
-        publicKey : process.env.PUBLIC_KEY,
-        privateKey : process.env.PRIVATE_KEY,
-        urlEndpoint : process.env.URL_IMAGEKIT
-    });
-
-    const data = await imagekit.upload({
-        file: base64Image,
-        fileName,
-    }).then(res => res);
-
-    const url = data.url;
-
-    return res.json({ image_url: url });
-});
-
 router.get("/recuperar-senha", usuarioController.showRecovery); // PRONTO
+router.post("/fazer-pedido", usuarioController.createEmailPedido); 
 router.post("/recuperar-senha", usuarioController.createRecovery); // PRONTO
 router.get("/senha-recuperada", usuarioController.showCompleteRecovery); // PRONTO
 router.post("/senha-recuperada", usuarioController.completeRecovery); // PRONTO

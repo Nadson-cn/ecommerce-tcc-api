@@ -18,7 +18,8 @@ class CarrinhoController {
       async show(req, res, next){
         const { usuario } = req.body;
         try {
-          const carrinho = await Carrinho.findOne({ usuario: usuario});
+          const carrinho = await Carrinho.findOne({ usuario: usuario}).
+          populate(["produto"]);
           console.log(usuario);
           if(!carrinho) res.send({ message: 'User not found'});
           return res.send({ carrinho });
@@ -31,9 +32,9 @@ class CarrinhoController {
     async store(req, res, next){
 
       const { usuario } = req.query;
-      const { produto, quantidade, precoUnitario } = req.body;
+      const { produto, precoUnitario } = req.body;
       try {
-          const _carrinho = new Carrinho({ usuario, produto, quantidade, precoUnitario });
+          const _carrinho = new Carrinho({ usuario, produto, precoUnitario });
 
           const _usuario = await Usuario.findById(usuario);
           if(!_usuario) return res.status(422).send({ error: "Usuario não cadastrado!"});

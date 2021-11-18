@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 const Usuario = mongoose.model("Usuario");
+const Carrinho = mongoose.model("Carrinho");
 const enviarEmailRecovery = require("../helpers/email-recovery");
+const enviarEmailPedido = require("../helpers/email-pedido");
 const usuario = require("../models/usuario");
 const { url } = require("inspector");
 const ImageKit = require("imagekit");
-const fs = require("fs");
+
+const transporter = require("nodemailer").createTransport(require("../config/email"));
 
 const imagekit = new ImageKit({
     publicKey : process.env.PUBLIC_KEY,
@@ -44,19 +47,20 @@ class UsuarioController {
     };
  
     // POST /registrar
-   
-    
     async store(req , res, next){
         const { nome, email, password } = req.body;
-
-        
             const usuario = new Usuario({ nome, email });
+            const carrinho = new Carrinho({usuario})
             usuario.setSenha(password);
 
-            return usuario.save().then(() => {
-                return res.json({ usuario: usuario.enviarAuthJSON() });
-            }).catch(next);
-        }
+            usuario.save()
+            
+            carrinho.push(usuario._id);
+            console.log("1\n\n\n\n\n\n\n")
+            console.log(carrinho)
+            console.log("\n\n\n\n\n\n\n-")
+            return res.json({ usuario: usuario.enviarAuthJSON() });
+    }
     // PUT /
     async update(req, res, next){
         const { nome, email, password } = req.body;
@@ -130,6 +134,13 @@ class UsuarioController {
                 });
             }).catch(next);
         }).catch(next);
+    }
+
+    async createEmailPedido(req, res, next){
+        const { items, _id }  = req.body;
+        const usuario = await Usuario.findById(_id);
+        enviarEmailPedido({ usuario, pedido: { items } })
+        return res.send({ success: true })
     }
 
     // GET /senha-recuperada

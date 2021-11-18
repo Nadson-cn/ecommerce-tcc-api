@@ -15,11 +15,7 @@ const app = express();
 
 // AMBIENTE
 const isProduction = process.env.NODE_ENV === "production";
-const PORT = process.env.PORT || 3000;
-
-// app.use(express().bodyParser({
-//   limit: "50mb"
-// }));
+const PORT = process.env.PORT || 5000;
 
 // ARQUIVOS ESTÁTICOS
 app.use("/public", express.static(__dirname + "/public"));
@@ -62,6 +58,7 @@ app.use((err, req, res, next) => {
   if(err.status == 404) console.warn("Error: ", err.message, new Date());
   res.json(err);
 });
+
 
 //ESCUTAR
 app.listen(PORT, (err) => {
