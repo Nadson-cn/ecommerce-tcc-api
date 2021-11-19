@@ -196,20 +196,6 @@ class ProdutoController {
    // GET /:id 
    async show(req,res,next){
     try{
-
-      const accountSid = process.env.TWILIO_SID;
-      const authToken = process.env.TWILIO_TOKEN;
-      
-      const client = require('twilio')(accountSid, authToken);
-      const userNumber = '19996932478';      
-      client.messages 
-            .create({ 
-               body: 'Deu certo!', 
-               from: 'whatsapp:+14155238886',       
-               to: `whatsapp:+55${userNumber}` 
-             }) 
-            .then(message => console.log(message.sid)) 
-      
       const produto = await Produto
         .findById(req.params.id)
         .populate('Avaliacoes');
