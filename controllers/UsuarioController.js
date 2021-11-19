@@ -49,16 +49,10 @@ class UsuarioController {
     // POST /registrar
     async store(req , res, next){
         const { nome, email, password } = req.body;
+        const check = await Usuario.find({email: email})
             const usuario = new Usuario({ nome, email });
-            const carrinho = new Carrinho({usuario})
             usuario.setSenha(password);
-
             usuario.save()
-            
-            carrinho.push(usuario._id);
-            console.log("1\n\n\n\n\n\n\n")
-            console.log(carrinho)
-            console.log("\n\n\n\n\n\n\n-")
             return res.json({ usuario: usuario.enviarAuthJSON() });
     }
     // PUT /

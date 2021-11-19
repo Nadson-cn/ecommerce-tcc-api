@@ -22,7 +22,6 @@ const UsuarioSchema = new mongoose.Schema({
         match: [/\S+@\S+\.\S+/, 'é inválido.']
     },
 
-    carrinho: { type: Schema.Types.ObjectId, ref: "Carrinho" },
 
     permissao: {
         type: Array,
@@ -71,7 +70,6 @@ UsuarioSchema.methods.enviarAuthJSON = function(){
         _id: this._id,
         nome: this.nome,
         email: this.email,
-        carrinho: this.carrinho,
         role: this.permissao,
         token: this.gerarToken(),
         imageUrl: this.imageUrl
@@ -83,7 +81,6 @@ UsuarioSchema.methods.enviarJSON = function(){
         _id: this._id,
         nome: this.nome,
         email: this.email,
-        carrinho: this.carrinho,
         role: this.permissao,
         imageUrl: this.imageUrl
     };
